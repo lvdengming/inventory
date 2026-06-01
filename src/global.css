@@ -1,0 +1,46 @@
+:root {
+  --color-primary: #007aff;
+  --color-primary-light: #5ac8fa;
+  --color-primary-dark: #0051d5;
+  --color-bg: #f2f2f7;
+  --color-text: #000000;
+  --color-text-secondary: #8e8e93;
+  --color-card: #ffffff;
+  --color-border: rgba(60, 60, 67, 0.12);
+  --color-nav: rgba(249, 249, 249, 0.72);
+  --color-tab: rgba(249, 249, 249, 0.72);
+}
+
+.dark {
+  --color-primary: #0a84ff;
+  --color-primary-light: #64d2ff;
+  --color-primary-dark: #0051d5;
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-text-secondary: #8e8e93;
+  --color-card: #1c1c1e;
+  --color-border: rgba(84, 84, 88, 0.36);
+  --color-nav: rgba(29, 29, 31, 0.72);
+  --color-tab: rgba(29, 29, 31, 0.72);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
