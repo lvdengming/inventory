@@ -16,4 +16,11 @@ export interface Outfit {
 
 export type ThemeMode = 'light' | 'dark';
 
-export const CATEGORIES = ['上衣', '裤子', '鞋子', '配饰', '包包', '其他'] as const;
+export const CATEGORIES = [
+  '上衣',
+  '裤子',
+  '鞋子',
+  '配饰',
+  '包包',
+  '其他',
+] as const;

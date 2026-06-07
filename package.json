@@ -12,6 +12,7 @@
     "postinstall": "umi setup"
   },
   "dependencies": {
+    "@iconify/react": "^6.0.2",
     "@umijs/plugins": "^4.1.0",
     "umi": "^4.1.0"
   },

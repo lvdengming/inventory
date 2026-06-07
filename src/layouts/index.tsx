@@ -1,16 +1,36 @@
+import { useI18n } from '@/i18n';
 import { useTheme } from '@/store';
-import { useEffect } from 'react';
+import { Icon } from '@iconify/react';
+import { useEffect, useRef, useState } from 'react';
 import { history, Outlet, useLocation } from 'umi';
-
-const tabs = [
-  { path: '/home', label: '首页', icon: '🏠' },
-  { path: '/outfit', label: '搭配', icon: '👔' },
-  { path: '/settings', label: '设置', icon: '⚙️' },
-];
 
 export default function Layout() {
   const location = useLocation();
   const { theme } = useTheme();
+  const { t } = useI18n();
+  const [animatingTab, setAnimatingTab] = useState<string | null>(null);
+  const prevPathRef = useRef(location.pathname);
+
+  const tabs = [
+    {
+      path: '/home',
+      label: t('tab.home'),
+      icon: 'lucide:house',
+      reverse: true,
+    },
+    {
+      path: '/outfit',
+      label: t('tab.outfit'),
+      icon: 'lucide:shirt',
+      reverse: false,
+    },
+    {
+      path: '/settings',
+      label: t('tab.settings'),
+      icon: 'lucide:settings',
+      reverse: true,
+    },
+  ];
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -20,31 +40,55 @@ export default function Layout() {
     }
   }, [theme]);
 
+  useEffect(() => {
+    if (prevPathRef.current !== location.pathname) {
+      setAnimatingTab(location.pathname);
+      prevPathRef.current = location.pathname;
+      const timer = setTimeout(() => setAnimatingTab(null), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const isDetailPage = location.pathname.startsWith('/item/');
+  const isSubSettingsPage = location.pathname.startsWith('/settings/');
+  const hideTabBar = isDetailPage || isSubSettingsPage;
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
-      <div className="pb-24">
+    <div className="min-h-screen text-[var(--color-text)]">
+      <div className="pb-28">
         <Outlet />
       </div>
-      {!isDetailPage && (
-        <div className="fixed bottom-0 left-0 right-0 pb-2 px-3 pb-[calc(env(safe-area-inset-bottom)+8px)]">
-          <nav className="backdrop-blur-2xl bg-[var(--color-tab)]/80 border border-[var(--color-border)] rounded-2xl shadow-lg overflow-hidden">
-            <div className="flex justify-around items-center h-14">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.path}
-                  onClick={() => history.push(tab.path)}
-                  className={`flex flex-col items-center gap-0.5 ${
-                    location.pathname === tab.path
-                      ? 'text-[var(--color-primary)]'
-                      : 'text-[var(--color-text-secondary)]'
-                  }`}
-                >
-                  <span className="text-xl">{tab.icon}</span>
-                  <span className="text-[10px]">{tab.label}</span>
-                </button>
-              ))}
+      {!hideTabBar && (
+        <div className="fixed bottom-0 left-0 right-0 px-4 pb-[calc(env(safe-area-inset-bottom)+10px)]">
+          <nav className="glass-lg rounded-[22px] overflow-hidden">
+            <div className="flex justify-around items-center h-16">
+              {tabs.map((tab) => {
+                const isActive = location.pathname === tab.path;
+                const isAnimating = animatingTab === tab.path;
+                return (
+                  <button
+                    key={tab.path}
+                    onClick={() => history.push(tab.path)}
+                    className={`flex flex-col items-center gap-1 px-5 py-1.5 rounded-2xl transition-all ${
+                      isActive
+                        ? 'text-[var(--color-primary)] scale-105'
+                        : 'text-[var(--color-text-secondary)]'
+                    }`}
+                  >
+                    <span
+                      key={isAnimating ? `${tab.path}-anim` : tab.path}
+                      className={`inline-flex text-[22px] ${isAnimating ? (tab.reverse ? 'tab-icon-draw-reverse' : 'tab-icon-draw') : ''}`}
+                    >
+                      <Icon icon={tab.icon} />
+                    </span>
+                    <span className="text-[10px] font-medium">{tab.label}</span>
+                  </button>
+                );
+              })}
             </div>
           </nav>
         </div>

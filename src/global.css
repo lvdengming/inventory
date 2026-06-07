@@ -3,12 +3,27 @@
   --color-primary-light: #5ac8fa;
   --color-primary-dark: #0051d5;
   --color-bg: #f2f2f7;
-  --color-text: #000000;
-  --color-text-secondary: #8e8e93;
-  --color-card: #ffffff;
-  --color-border: rgba(60, 60, 67, 0.12);
-  --color-nav: rgba(249, 249, 249, 0.72);
-  --color-tab: rgba(249, 249, 249, 0.72);
+  --color-bg-gradient: linear-gradient(
+    160deg,
+    #e8ecf4 0%,
+    #f2f2f7 40%,
+    #e6edf5 100%
+  );
+  --color-text: #1c1c1e;
+  --color-text-secondary: #6e6e73;
+  --color-card: rgba(255, 255, 255, 0.55);
+  --color-card-solid: rgba(255, 255, 255, 0.72);
+  --color-border: rgba(255, 255, 255, 0.6);
+  --color-border-outer: rgba(0, 0, 0, 0.06);
+  --color-separator: rgba(60, 60, 67, 0.12);
+  --color-nav: rgba(255, 255, 255, 0.45);
+  --color-tab: rgba(255, 255, 255, 0.45);
+  --glass-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --glass-shadow-lg:
+    0 8px 32px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .dark {
@@ -16,12 +31,27 @@
   --color-primary-light: #64d2ff;
   --color-primary-dark: #0051d5;
   --color-bg: #000000;
-  --color-text: #ffffff;
-  --color-text-secondary: #8e8e93;
-  --color-card: #1c1c1e;
-  --color-border: rgba(84, 84, 88, 0.36);
-  --color-nav: rgba(29, 29, 31, 0.72);
-  --color-tab: rgba(29, 29, 31, 0.72);
+  --color-bg-gradient: linear-gradient(
+    160deg,
+    #0a0a0f 0%,
+    #000000 40%,
+    #080812 100%
+  );
+  --color-text: #f5f5f7;
+  --color-text-secondary: #98989f;
+  --color-card: rgba(56, 56, 60, 0.45);
+  --color-card-solid: rgba(44, 44, 46, 0.65);
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-border-outer: rgba(255, 255, 255, 0.06);
+  --color-separator: rgba(84, 84, 88, 0.36);
+  --color-nav: rgba(30, 30, 34, 0.55);
+  --color-tab: rgba(30, 30, 34, 0.55);
+  --glass-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.3), 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --glass-shadow-lg:
+    0 8px 32px rgba(0, 0, 0, 0.4), 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -29,12 +59,15 @@
 }
 
 body {
+  background: var(--color-bg-gradient);
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
+  min-height: 100vh;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
@@ -43,4 +76,151 @@ body {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* iOS 26 Liquid Glass 效果 */
+.glass {
+  background: var(--color-card);
+  backdrop-filter: blur(40px) saturate(1.8);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-lg {
+  background: var(--color-card);
+  backdrop-filter: blur(50px) saturate(2);
+  -webkit-backdrop-filter: blur(50px) saturate(2);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--glass-shadow-lg);
+}
+
+.glass-solid {
+  background: var(--color-card-solid);
+  backdrop-filter: blur(40px) saturate(1.8);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-btn {
+  background: var(--color-card);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid var(--color-border);
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.dark .glass-btn {
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* 弹框动效 */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.animate-scale-in {
+  animation: scale-in 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* 底部导航栏 SVG 线性绘制动画 */
+@keyframes icon-draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes icon-draw-reverse {
+  from {
+    stroke-dashoffset: -100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes icon-bounce {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tab-icon-draw {
+  animation: icon-bounce 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.tab-icon-draw svg path,
+.tab-icon-draw svg line,
+.tab-icon-draw svg circle,
+.tab-icon-draw svg rect,
+.tab-icon-draw svg polyline,
+.tab-icon-draw svg polygon {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: icon-draw 1s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+.tab-icon-draw-reverse {
+  animation: icon-bounce 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.tab-icon-draw-reverse svg path,
+.tab-icon-draw-reverse svg line,
+.tab-icon-draw-reverse svg circle,
+.tab-icon-draw-reverse svg rect,
+.tab-icon-draw-reverse svg polyline,
+.tab-icon-draw-reverse svg polygon {
+  stroke-dasharray: 100;
+  stroke-dashoffset: -100;
+  animation: icon-draw-reverse 1s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }

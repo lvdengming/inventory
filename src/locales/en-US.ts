@@ -1,0 +1,61 @@
+export default {
+  back: 'Back',
+  delete: 'Delete',
+  cancel: 'Cancel',
+  done: 'Done',
+  save: 'Save',
+
+  'tab.home': 'Home',
+  'tab.outfit': 'Outfit',
+  'tab.settings': 'Settings',
+
+  'home.title': 'Inventory',
+  'home.count': '{count} items',
+  'home.empty': 'No items',
+  'home.emptyHint': 'Add items in Settings',
+
+  'outfit.title': 'Outfits',
+  'outfit.hint': 'Select from top to bottom',
+  'outfit.none': 'No {category}',
+  'outfit.save': 'Save Outfit',
+  'outfit.saved': 'Saved Outfits',
+
+  'settings.title': 'Settings',
+  'settings.items': 'Items',
+  'settings.appearance': 'Appearance',
+  'settings.data': 'Data',
+  'settings.export': 'Export Data',
+  'settings.import': 'Import Data',
+  'settings.language': 'Language',
+
+  'appearance.title': 'Appearance',
+  'appearance.theme': 'Theme',
+  'theme.light': 'Light',
+  'theme.dark': 'Dark',
+
+  'items.title': 'Items',
+  'items.empty': 'No items',
+  'items.emptyHint': 'Tap + to add items',
+  'items.deleteTitle': 'Confirm Delete',
+  'items.deleteMsg': 'Are you sure? This cannot be undone.',
+
+  'addItem.title': 'Add Item',
+  'addItem.name': 'Item name',
+  'addItem.price': 'Price',
+  'addItem.note': 'Note',
+  'addItem.image': 'Choose Image',
+
+  'detail.notFound': 'Item not found',
+  'detail.category': 'Category',
+  'detail.date': 'Purchase Date',
+  'detail.price': 'Price',
+  'detail.note': 'Note',
+  'detail.notRecorded': 'N/A',
+
+  'category.tops': 'Tops',
+  'category.pants': 'Pants',
+  'category.shoes': 'Shoes',
+  'category.accessories': 'Accessories',
+  'category.bags': 'Bags',
+  'category.other': 'Other',
+};

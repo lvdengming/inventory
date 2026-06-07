@@ -19,17 +19,37 @@ export default defineConfig({
         { path: '/home', component: '@/pages/home/index' },
         { path: '/outfit', component: '@/pages/outfit/index' },
         { path: '/settings', component: '@/pages/settings/index' },
+        { path: '/settings/items', component: '@/pages/settings/items' },
+        {
+          path: '/settings/appearance',
+          component: '@/pages/settings/appearance',
+        },
+        { path: '/settings/language', component: '@/pages/settings/language' },
+        { path: '/settings/data', component: '@/pages/settings/data' },
         { path: '/item/:id', component: '@/pages/item/detail' },
       ],
     },
   ],
-  plugins: ['@umijs/plugins/dist/tailwindcss'],
+  plugins: ['@umijs/plugins/dist/tailwindcss', '@umijs/plugins/dist/locale'],
   tailwindcss: {},
-  metas: [{ name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' }],
+  locale: {
+    default: 'zh-CN',
+    baseSeparator: '-',
+    antd: false,
+  },
+  metas: [
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1, viewport-fit=cover',
+    },
+  ],
   ...(isPWA
     ? {
         metas: [
-          { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
+          {
+            name: 'viewport',
+            content: 'width=device-width, initial-scale=1, viewport-fit=cover',
+          },
           { name: 'theme-color', content: '#87CEEB' },
         ],
         links: [{ rel: 'manifest', href: '/manifest.json' }],

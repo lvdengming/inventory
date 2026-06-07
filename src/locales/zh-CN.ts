@@ -1,0 +1,61 @@
+export default {
+  back: '返回',
+  delete: '删除',
+  cancel: '取消',
+  done: '完成',
+  save: '保存',
+
+  'tab.home': '首页',
+  'tab.outfit': '搭配',
+  'tab.settings': '设置',
+
+  'home.title': '物品清单',
+  'home.count': '共 {count} 件物品',
+  'home.empty': '暂无物品',
+  'home.emptyHint': '请在设置中添加',
+
+  'outfit.title': '穿搭搭配',
+  'outfit.hint': '从上往下选择搭配',
+  'outfit.none': '暂无{category}',
+  'outfit.save': '保存搭配',
+  'outfit.saved': '已保存搭配',
+
+  'settings.title': '设置',
+  'settings.items': '物品管理',
+  'settings.appearance': '外观',
+  'settings.data': '数据',
+  'settings.export': '导出数据',
+  'settings.import': '导入数据',
+  'settings.language': '语言',
+
+  'appearance.title': '外观',
+  'appearance.theme': '主题',
+  'theme.light': '浅色模式',
+  'theme.dark': '深色模式',
+
+  'items.title': '物品管理',
+  'items.empty': '暂无物品',
+  'items.emptyHint': '点击右下角 + 按钮添加物品',
+  'items.deleteTitle': '确认删除',
+  'items.deleteMsg': '确定要删除该物品吗？此操作不可恢复。',
+
+  'addItem.title': '添加物品',
+  'addItem.name': '物品名称',
+  'addItem.price': '购买金额',
+  'addItem.note': '备注',
+  'addItem.image': '选择图片',
+
+  'detail.notFound': '物品不存在',
+  'detail.category': '分类',
+  'detail.date': '购买日期',
+  'detail.price': '购买金额',
+  'detail.note': '备注',
+  'detail.notRecorded': '未记录',
+
+  'category.tops': '上衣',
+  'category.pants': '裤子',
+  'category.shoes': '鞋子',
+  'category.accessories': '配饰',
+  'category.bags': '包包',
+  'category.other': '其他',
+};

@@ -43,7 +43,10 @@ export function useStore() {
 
   const updateItem = useCallback((item: Item) => {
     setData((prev) => {
-      const next = { ...prev, items: prev.items.map((i) => (i.id === item.id ? item : i)) };
+      const next = {
+        ...prev,
+        items: prev.items.map((i) => (i.id === item.id ? item : i)),
+      };
       saveData(next);
       return next;
     });
@@ -59,7 +62,10 @@ export function useStore() {
 
   const removeOutfit = useCallback((id: string) => {
     setData((prev) => {
-      const next = { ...prev, outfits: prev.outfits.filter((o) => o.id !== id) };
+      const next = {
+        ...prev,
+        outfits: prev.outfits.filter((o) => o.id !== id),
+      };
       saveData(next);
       return next;
     });
