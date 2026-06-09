@@ -16,19 +16,16 @@ export default function Layout() {
       path: '/home',
       label: t('tab.home'),
       icon: 'lucide:house',
-      reverse: true,
     },
     {
       path: '/outfit',
       label: t('tab.outfit'),
       icon: 'lucide:shirt',
-      reverse: false,
     },
     {
       path: '/settings',
       label: t('tab.settings'),
       icon: 'lucide:settings',
-      reverse: true,
     },
   ];
 
@@ -40,11 +37,17 @@ export default function Layout() {
     }
   }, [theme]);
 
+  const tabPaths = tabs.map((tab) => tab.path);
+
   useEffect(() => {
-    if (prevPathRef.current !== location.pathname) {
-      setAnimatingTab(location.pathname);
-      prevPathRef.current = location.pathname;
-      const timer = setTimeout(() => setAnimatingTab(null), 1000);
+    const prev = prevPathRef.current;
+    const curr = location.pathname;
+    prevPathRef.current = curr;
+
+    // 仅在底部导航栏 tab 之间切换时才触发动画
+    if (prev !== curr && tabPaths.includes(prev) && tabPaths.includes(curr)) {
+      setAnimatingTab(curr);
+      const timer = setTimeout(() => setAnimatingTab(null), 500);
       return () => clearTimeout(timer);
     }
   }, [location.pathname]);
@@ -59,7 +62,7 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen text-[var(--color-text)]">
-      <div className="pb-28">
+      <div className={hideTabBar ? '' : 'pb-28'}>
         <Outlet />
       </div>
       {!hideTabBar && (
@@ -81,7 +84,7 @@ export default function Layout() {
                   >
                     <span
                       key={isAnimating ? `${tab.path}-anim` : tab.path}
-                      className={`inline-flex text-[22px] ${isAnimating ? (tab.reverse ? 'tab-icon-draw-reverse' : 'tab-icon-draw') : ''}`}
+                      className={`inline-flex text-[22px] ${isAnimating ? 'tab-icon-draw' : ''}`}
                     >
                       <Icon icon={tab.icon} />
                     </span>

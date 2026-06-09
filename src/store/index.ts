@@ -1,9 +1,25 @@
 import { mockItems, mockOutfits } from '@/mock/data';
-import { Item, Outfit, ThemeMode } from '@/types';
+import { DEFAULT_CATEGORIES, Item, Outfit, ThemeMode } from '@/types';
 import { useCallback, useState } from 'react';
 
 const STORAGE_KEY = 'inventory_data';
 const THEME_KEY = 'inventory_theme';
+const CATEGORIES_KEY = 'inventory_categories';
+
+function loadCategories(): string[] {
+  try {
+    const raw = localStorage.getItem(CATEGORIES_KEY);
+    if (raw) return JSON.parse(raw);
+    localStorage.setItem(CATEGORIES_KEY, JSON.stringify(DEFAULT_CATEGORIES));
+    return [...DEFAULT_CATEGORIES];
+  } catch {
+    return [...DEFAULT_CATEGORIES];
+  }
+}
+
+function saveCategories(categories: string[]) {
+  localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories));
+}
 
 function loadData(): { items: Item[]; outfits: Outfit[] } {
   try {
@@ -24,6 +40,29 @@ function saveData(data: { items: Item[]; outfits: Outfit[] }) {
 
 export function useStore() {
   const [data, setData] = useState(loadData);
+  const [categories, setCategories] = useState(loadCategories);
+
+  const addCategory = useCallback((name: string) => {
+    setCategories((prev) => {
+      if (prev.includes(name)) return prev;
+      const next = [...prev, name];
+      saveCategories(next);
+      return next;
+    });
+  }, []);
+
+  const removeCategory = useCallback((name: string) => {
+    setCategories((prev) => {
+      const next = prev.filter((c) => c !== name);
+      saveCategories(next);
+      return next;
+    });
+  }, []);
+
+  const reorderCategories = useCallback((newCategories: string[]) => {
+    setCategories(newCategories);
+    saveCategories(newCategories);
+  }, []);
 
   const addItem = useCallback((item: Item) => {
     setData((prev) => {
@@ -87,11 +126,15 @@ export function useStore() {
 
   return {
     ...data,
+    categories,
     addItem,
     removeItem,
     updateItem,
     addOutfit,
     removeOutfit,
+    addCategory,
+    removeCategory,
+    reorderCategories,
     importData,
     exportData,
   };

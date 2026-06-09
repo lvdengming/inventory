@@ -22,6 +22,7 @@ export default {
 
   'settings.title': 'Settings',
   'settings.items': 'Items',
+  'settings.categories': 'Categories',
   'settings.appearance': 'Appearance',
   'settings.data': 'Data',
   'settings.export': 'Export Data',
@@ -58,4 +59,11 @@ export default {
   'category.accessories': 'Accessories',
   'category.bags': 'Bags',
   'category.other': 'Other',
+
+  'categories.title': 'Categories',
+  'categories.add': 'Add',
+  'categories.placeholder': 'Category name',
+  'categories.empty': 'No categories',
+  'categories.deleteTitle': 'Confirm Delete',
+  'categories.deleteMsg': 'Items in this category will become uncategorized.',
 };

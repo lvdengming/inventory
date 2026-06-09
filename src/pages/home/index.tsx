@@ -1,17 +1,16 @@
 import { getCategoryName, useI18n } from '@/i18n';
 import { useStore } from '@/store';
-import { CATEGORIES } from '@/types';
 import { Icon } from '@iconify/react';
 import { history } from 'umi';
 
 export default function HomePage() {
-  const { items } = useStore();
+  const { items, categories } = useStore();
   const { t } = useI18n();
 
   return (
     <div>
       {/* iOS 26 大标题导航 */}
-      <header className="px-5 pt-14 pb-3">
+      <header className="px-5 pt-[calc(env(safe-area-inset-top)+8px)] pb-3">
         <h1 className="text-[34px] font-bold tracking-tight">
           {t('home.title')}
         </h1>
@@ -22,7 +21,7 @@ export default function HomePage() {
 
       {/* 分类展示 */}
       <div className="px-5">
-        {CATEGORIES.map((category) => {
+        {categories.map((category) => {
           const categoryItems = items.filter(
             (item) => item.category === category,
           );

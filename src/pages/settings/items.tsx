@@ -1,34 +1,34 @@
 import { getCategoryName, useI18n } from '@/i18n';
 import { useStore } from '@/store';
-import { CATEGORIES, Item } from '@/types';
+import { Item } from '@/types';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import { history } from 'umi';
 
 export default function ItemsManagementPage() {
-  const { items, addItem, removeItem } = useStore();
+  const { items, categories, addItem, removeItem } = useStore();
   const [showAdd, setShowAdd] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const { t } = useI18n();
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="h-screen flex flex-col overflow-x-hidden">
       {/* 固定顶部导航栏 */}
-      <header className="fixed top-0 left-0 right-0 z-40 glass-lg px-5 pt-12 pb-3 flex items-center">
+      <header className="shrink-0 glass-lg px-5 pt-[calc(env(safe-area-inset-top)+8px)] pb-3 flex items-center">
         <button
           onClick={() => history.back()}
           className="text-[var(--color-primary)] text-[17px] font-medium mr-3 flex items-center gap-0.5"
         >
-          <Icon icon="lucide:chevron-left" className="text-sm" />
-          {t('back')}
+          <Icon icon="lucide:chevron-left" className="text-xl leading-none" />
+          <span className="leading-none">{t('back')}</span>
         </button>
         <h1 className="text-[17px] font-semibold flex-1 text-center mr-12">
           {t('items.title')}
         </h1>
       </header>
 
-      {/* 内容区域，顶部留出导航栏高度 */}
-      <div className="px-5 pt-24">
+      {/* 内容区域 */}
+      <div className="flex-1 overflow-y-auto px-5 pt-4">
         {items.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
             <div className="text-7xl mb-4 text-[var(--color-text-secondary)]">
@@ -42,7 +42,7 @@ export default function ItemsManagementPage() {
             </p>
           </div>
         ) : (
-          CATEGORIES.map((category) => {
+          categories.map((category) => {
             const categoryItems = items.filter(
               (item) => item.category === category,
             );
@@ -103,7 +103,11 @@ export default function ItemsManagementPage() {
 
         {/* 添加物品弹窗 */}
         {showAdd && (
-          <AddItemModal onClose={() => setShowAdd(false)} onAdd={addItem} />
+          <AddItemModal
+            onClose={() => setShowAdd(false)}
+            onAdd={addItem}
+            categories={categories}
+          />
         )}
 
         {/* 删除确认弹窗 */}
@@ -144,13 +148,15 @@ export default function ItemsManagementPage() {
 function AddItemModal({
   onClose,
   onAdd,
+  categories,
 }: {
   onClose: () => void;
   onAdd: (item: Item) => void;
+  categories: string[];
 }) {
   const [form, setForm] = useState({
     name: '',
-    category: CATEGORIES[0],
+    category: categories[0] || '',
     price: '',
     purchaseDate: new Date().toISOString().slice(0, 10),
     description: '',
@@ -215,7 +221,7 @@ function AddItemModal({
             onChange={(e) => setForm({ ...form, category: e.target.value })}
             className={inputClass}
           >
-            {CATEGORIES.map((c) => (
+            {categories.map((c) => (
               <option key={c} value={c}>
                 {getCategoryName(t, c)}
               </option>

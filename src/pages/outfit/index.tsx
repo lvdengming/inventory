@@ -1,11 +1,10 @@
 import { getCategoryName, useI18n } from '@/i18n';
 import { useStore } from '@/store';
-import { CATEGORIES } from '@/types';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 
 export default function OutfitPage() {
-  const { items, outfits, addOutfit, removeOutfit } = useStore();
+  const { items, categories, outfits, addOutfit, removeOutfit } = useStore();
   const [selected, setSelected] = useState<Record<string, string>>({});
   const { t } = useI18n();
 
@@ -29,7 +28,7 @@ export default function OutfitPage() {
 
   return (
     <div className="px-5">
-      <header className="pt-14 pb-4">
+      <header className="pt-[calc(env(safe-area-inset-top)+8px)] pb-4">
         <h1 className="text-[34px] font-bold tracking-tight">
           {t('outfit.title')}
         </h1>
@@ -39,9 +38,7 @@ export default function OutfitPage() {
       </header>
 
       {/* 按分类从上往下选择 */}
-      {CATEGORIES.filter((c) =>
-        ['上衣', '裤子', '鞋子', '配饰'].includes(c),
-      ).map((category) => {
+      {categories.map((category) => {
         const categoryItems = items.filter(
           (item) => item.category === category,
         );

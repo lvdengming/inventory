@@ -2,7 +2,7 @@
  * @Author: error: git config user.email & please set dead value or install git
  * @Date: 2026-06-01 22:28:15
  * @LastEditors: error: git config user.email & please set dead value or install git
- * @LastEditTime: 2026-06-07 22:56:24
+ * @LastEditTime: 2026-06-09 22:15:47
  */
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/store';
@@ -14,15 +14,15 @@ export default function AppearancePage() {
   const { t } = useI18n();
 
   return (
-    <div>
+    <div className="h-screen flex flex-col">
       {/* 固定顶部导航栏 */}
-      <header className="fixed top-0 left-0 right-0 z-40 glass-lg px-5 pt-12 pb-3 flex items-center">
+      <header className="shrink-0 glass-lg px-5 pt-[calc(env(safe-area-inset-top)+8px)] pb-3 flex items-center">
         <button
           onClick={() => history.back()}
           className="text-[var(--color-primary)] text-[17px] font-medium mr-3 flex items-center gap-0.5"
         >
-          <Icon icon="lucide:chevron-left" className="text-sm" />
-          {t('back')}
+          <Icon icon="lucide:chevron-left" className="text-xl leading-none" />
+          <span className="leading-none">{t('back')}</span>
         </button>
         <h1 className="text-[17px] font-semibold flex-1 text-center mr-12">
           {t('appearance.title')}
@@ -30,7 +30,7 @@ export default function AppearancePage() {
       </header>
 
       {/* 内容区域 */}
-      <div className="px-5 pt-24">
+      <div className="flex-1 overflow-y-auto px-5 pt-4">
         {/* 主题选择 */}
         <section className="mb-8">
           <h2 className="text-[13px] font-semibold text-[var(--color-text-secondary)] uppercase mb-2 px-1 tracking-wide">

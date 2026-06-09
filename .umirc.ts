@@ -26,6 +26,10 @@ export default defineConfig({
         },
         { path: '/settings/language', component: '@/pages/settings/language' },
         { path: '/settings/data', component: '@/pages/settings/data' },
+        {
+          path: '/settings/categories',
+          component: '@/pages/settings/categories',
+        },
         { path: '/item/:id', component: '@/pages/item/detail' },
       ],
     },
@@ -51,6 +55,11 @@ export default defineConfig({
             content: 'width=device-width, initial-scale=1, viewport-fit=cover',
           },
           { name: 'theme-color', content: '#87CEEB' },
+          { name: 'apple-mobile-web-app-capable', content: 'yes' },
+          {
+            name: 'apple-mobile-web-app-status-bar-style',
+            content: 'black-translucent',
+          },
         ],
         links: [{ rel: 'manifest', href: '/manifest.json' }],
       }

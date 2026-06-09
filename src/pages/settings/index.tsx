@@ -7,7 +7,7 @@ export default function SettingsPage() {
 
   return (
     <div className="px-5">
-      <header className="pt-14 pb-4">
+      <header className="pt-[calc(env(safe-area-inset-top)+8px)] pb-4">
         <h1 className="text-[34px] font-bold tracking-tight">
           {t('settings.title')}
         </h1>
@@ -23,6 +23,20 @@ export default function SettingsPage() {
             <div className="flex items-center gap-3">
               <Icon icon="lucide:package" className="text-2xl" />
               <span className="text-[17px]">{t('settings.items')}</span>
+            </div>
+            <Icon
+              icon="lucide:chevron-right"
+              className="text-[var(--color-text-secondary)] text-sm"
+            />
+          </button>
+          <div className="ml-[52px] mr-4 h-px bg-[var(--color-separator)]" />
+          <button
+            onClick={() => history.push('/settings/categories')}
+            className="w-full flex items-center justify-between px-4 py-4 active:bg-white/10 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <Icon icon="lucide:tags" className="text-2xl" />
+              <span className="text-[17px]">{t('settings.categories')}</span>
             </div>
             <Icon
               icon="lucide:chevron-right"

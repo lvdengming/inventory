@@ -4,10 +4,10 @@
   "private": true,
   "description": "物品清单管理应用",
   "scripts": {
-    "dev": "umi dev",
-    "build": "umi build",
-    "build:pwa": "cross-env BUILD_MODE=pwa umi build",
     "build:h5": "cross-env BUILD_MODE=h5 umi build",
+    "build:pwa": "cross-env BUILD_MODE=pwa umi build",
+    "deploy": "bash scripts/deploy.sh",
+    "dev": "cross-env BUILD_MODE=pwa umi dev",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "postinstall": "umi setup"
   },

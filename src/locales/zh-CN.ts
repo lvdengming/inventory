@@ -22,6 +22,7 @@ export default {
 
   'settings.title': '设置',
   'settings.items': '物品管理',
+  'settings.categories': '分类管理',
   'settings.appearance': '外观',
   'settings.data': '数据',
   'settings.export': '导出数据',
@@ -58,4 +59,12 @@ export default {
   'category.accessories': '配饰',
   'category.bags': '包包',
   'category.other': '其他',
+
+  'categories.title': '分类管理',
+  'categories.add': '添加',
+  'categories.placeholder': '输入分类名称',
+  'categories.empty': '暂无分类',
+  'categories.deleteTitle': '确认删除',
+  'categories.deleteMsg':
+    '删除分类不会删除该分类下的物品，但物品将变为未分类状态。',
 };
